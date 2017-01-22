@@ -1,0 +1,16 @@
+{
+  "name": "typescript-grope",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:shangfeiSF/typescript-grope.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "TypeScript"
+  ],
+  "author": "shangfei.SF",
+  "license": "ISC"
+}
