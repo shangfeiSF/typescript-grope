@@ -2,11 +2,11 @@
 let isStringOrNumber: string | number;
 isStringOrNumber = 'hello world';
 isStringOrNumber = 7;
-/* Error */ isStringOrNumber = true;
+isStringOrNumber = true;  // error code
 
 // 当不确定一个联合类型的变量是哪个类型时，只能访问此联合类型的所有类型里共有的属性或方法
 function useLength(params: string | number): number {
-    /* Error */ return params.length;
+    return params.length;  // error code
 }
 
 function useToString(params: string | number): string {
@@ -18,4 +18,4 @@ let testLength: string | number;
 testLength = 'hello world';
 console.log(testLength.length);
 testLength = 7;
-/* Error */ console.log(testLength.length);
+console.log(testLength.length);  // error code

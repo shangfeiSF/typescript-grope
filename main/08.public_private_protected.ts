@@ -53,8 +53,8 @@ class Phone {
 }
 
 let phone = new Phone(123456);
-/* Error */ console.log(phone.password);
-/* Error */ phone.showPassword();
+console.log(phone.password);  // error code
+phone.showPassword();  // error code
 phone.open('shangfei', 123456);
 phone.open('shangfet', 654321);
 
@@ -70,10 +70,10 @@ class Mobile extends Phone {
     }
 
     info(): void {
-        /* Error */ console.log(this.password);
-        /* Error */ console.log(super.password);
-        /* Error */ this.showPassword();
-        /* Error */ super.showPassword();
+        console.log(this.password);  // error code
+        console.log(super.password);  // error code
+        this.showPassword();  // error code
+        super.showPassword();  // error code
     }
 
     call(someone: string, password: number): boolean {
@@ -91,9 +91,9 @@ class Mobile extends Phone {
 }
 
 let mobile = new Mobile(123456, '4.5inch');
-/* Error */ console.log(mobile.size);
-/* Error */ console.log(mobile.password);
-/* Error */ mobile.showPassword();
+console.log(mobile.size);  // error code
+console.log(mobile.password);  // error code
+mobile.showPassword();  // error code
 mobile.info();
 mobile.call('shangfei', 123456);
 mobile.call('shangfei', 654321);
@@ -127,9 +127,9 @@ class Employee {
 
 let employee = new Employee('shangfei', '123456', 1);
 console.log(employee.name);
-/* Error */ console.log(employee.password);
-/* Error */ console.log(employee.id);
-/* Error */ employee.passport('123456');
+console.log(employee.password);  // error code
+console.log(employee.id);  // error code
+employee.passport('123456');  // error code
 employee.info('123456');
 
 // protected修饰符限制的属性和方法：
@@ -153,6 +153,6 @@ class Engineer extends Employee {
 }
 
 let engineer = new Engineer('shangfei', '12345', 1, 'senior');
-/* Error */ console.log(engineer.id);
+console.log(engineer.id);  // error code
 engineer.info('12345');
 engineer.details('12345');
