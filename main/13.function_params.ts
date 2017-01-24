@@ -40,32 +40,29 @@ express('你好', 'Chinese');
 express('你好', 'Chinese', 'writing');
 
 // TypeScript类型兼容性在函数赋值时的原则
-// (1) 右函数要求左函数的返回值类型至少是右函数的返回值类型
-// (2) 右函数要求左函数的参数列表中参数的个数+类型至少是右函数必选参数的个数+类型
+// (1) 左函数的返回值类型 >= 右函数的返回值类型
+// (2) 左函数参数列表中参数的个数 >= 右函数参数列表中参数的个数
+// (3) 左函数参数列表中每个参数的类型 >= 右函数参数列表中对应位置参数的类型
 
-// send要求(1)返回值类型至少是void类型
-// send要求(2)参数列表中至少参数个数+类型是 2 + (string, string)的形式
 let send_alias_1: (a: string, b: string, c?: string, d?: string) => void = send;
 let send_alias_2: (a: string, b: string) => void = send;
-let send_alias_3: (a: string, c?: string) => void = send;
+let send_alias_3: (a: string, b?: string) => void = send;
 let send_alias_4: (a: string, b: string, c?: string, d?: string) => any = send;
+let send_alias_5: (a: any, b: string, c?: string, d?: string) => void = send;
 
-let send_alias_5: (a: string) => void = send;  // error code
-let send_alias_6: () => void = send;  // error code
-let send_alias_7: (a: number, b: string, c?: string, d?: string) => void = send;  // error code
-let send_alias_8: (a: string, b: string, c?: string, d?: string) => number = send;  // error code
-
-// express要求(1)返回值类型至少是void类型
-// express要求(2)参数列表中至少参数个数+类型是 1 + (string)的形式
+let send_alias_6: (a: string) => void = send;  // error code
+let send_alias_7: () => void = send;  // error code
+let send_alias_8: (a: number, b: string, c?: string, d?: string) => void = send;  // error code
+let send_alias_9: (a: string, b: string, c?: string, d?: string) => number = send;  // error code
 let express_alias_1: (a: string, b: string, c?: string, d?: string) => void = express;
 let express_alias_2: (a: string, b: string) => void = express;
-let express_alias_3: (a: string, c?: string) => void = express;
+let express_alias_3: (a: string, b?: string) => void = express;
 let express_alias_4: (a: string) => void = express;
 let express_alias_5: (a: string, b: string, c?: string, d?: string) => any = express;
-
-let express_alias_6: () => void = express;  // error code
-let express_alias_7: (a: number, b: string, c?: string, d?: string) => void = express;  // error code
-let express_alias_8: (a: string, b: string, c?: string, d?: string) => number = express;  // error code
+let express_alias_6: (a: any, b: string, c?: string, d?: string) => void = express;
+let express_alias_7: () => void = express;  // error code
+let express_alias_8: (a: number, b: string, c?: string, d?: string) => void = express;  // error code
+let express_alias_9: (a: string, b: string, c?: string, d?: string) => number = express;  // error code
 
 // 剩余参数使用ES6的...来表示
 function buildSentence(firstWord: string, ...restWords: string[]): string {
