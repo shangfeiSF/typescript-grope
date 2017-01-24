@@ -39,10 +39,10 @@ let navy = new Navy('Jerry');
 let airforce = new Airforce('John');
 let specialforce = new Specialforce('David');
 
-army = navy;
+/* Error */ army = navy;
 navy = airforce;
 airforce = specialforce;
-specialforce = army;
+/* Error */ specialforce = army;
 
 // 当比较带有private或protected成员的类型时
 
@@ -85,5 +85,5 @@ let parentNode = new ParentNode('parentNode', 2, 101);
 let childNode = new ChildNode('childNode', 3, 102);
 
 baseNode = parentNode;
-baseNode = childNode;
-childNode = baseNode;
+/* Error */ baseNode = childNode;
+/* Error */ childNode = baseNode;

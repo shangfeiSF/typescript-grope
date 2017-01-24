@@ -53,8 +53,8 @@ class Phone {
 }
 
 let phone = new Phone(123456);
-console.log(phone.password);
-phone.showPassword();
+/* Error */ console.log(phone.password);
+/* Error */ phone.showPassword();
 phone.open('shangfei', 123456);
 phone.open('shangfet', 654321);
 
@@ -70,10 +70,10 @@ class Mobile extends Phone {
     }
 
     info(): void {
-        console.log(this.password);
-        console.log(super.password);
-        this.showPassword();
-        super.showPassword();
+        /* Error */ console.log(this.password);
+        /* Error */ console.log(super.password);
+        /* Error */ this.showPassword();
+        /* Error */ super.showPassword();
     }
 
     call(someone: string, password: number): boolean {
@@ -91,9 +91,9 @@ class Mobile extends Phone {
 }
 
 let mobile = new Mobile(123456, '4.5inch');
-console.log(mobile.size);
-console.log(mobile.password);
-mobile.showPassword();
+/* Error */ console.log(mobile.size);
+/* Error */ console.log(mobile.password);
+/* Error */ mobile.showPassword();
 mobile.info();
 mobile.call('shangfei', 123456);
 mobile.call('shangfei', 654321);
@@ -127,9 +127,9 @@ class Employee {
 
 let employee = new Employee('shangfei', '123456', 1);
 console.log(employee.name);
-console.log(employee.password);
-console.log(employee.id);
-employee.passport('123456');
+/* Error */ console.log(employee.password);
+/* Error */ console.log(employee.id);
+/* Error */ employee.passport('123456');
 employee.info('123456');
 
 // protected修饰符限制的属性和方法：
@@ -153,6 +153,6 @@ class Engineer extends Employee {
 }
 
 let engineer = new Engineer('shangfei', '12345', 1, 'senior');
-console.log(engineer.id);
+/* Error */ console.log(engineer.id);
 engineer.info('12345');
 engineer.details('12345');

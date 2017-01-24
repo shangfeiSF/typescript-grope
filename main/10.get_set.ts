@@ -26,4 +26,4 @@ class Phone {
 
 let phone = new Phone();
 console.log(phone.type);
-phone.type = 'some';
+/* Error */ phone.type = 'some';

@@ -73,8 +73,8 @@ class Phone {
 let phone = new Phone(12345678901);
 console.log(phone.productionID);
 console.log(phone.phoneNumber);
-phone.productionID = '123456abcd';
-phone.phoneNumber = 10987654321;
+/* Error */ phone.productionID = '123456abcd';
+/* Error */ phone.phoneNumber = 10987654321;
 
 // 参数属性：可以方便地让我们在一个地方定义并初始化一个属性
 class Engineer {
@@ -91,8 +91,8 @@ class Engineer {
 let engineer = new Engineer('shangfei', 12345678901, 1);
 engineer.info();
 console.log(engineer.name);
-console.log(engineer.phone);
-console.log(engineer.id);
+/* Error */ console.log(engineer.phone);
+/* Error */ console.log(engineer.id);
 
 // 类的实例成员，仅当类被实例化的时候才会被初始化
 // 类的静态成员，存在于类本身上而不是类的实例上

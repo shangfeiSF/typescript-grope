@@ -50,7 +50,7 @@ class Mobile extends Phone {
 
 let mobile = new Mobile('Firday');
 console.log(mobile.name);
-mobile.boot();
+/* Error */ mobile.boot();
 mobile.open();
 mobile.call();
 mobile.restart();

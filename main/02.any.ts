@@ -26,7 +26,7 @@ notSure.charAt(0);
 
 let prettySure: Object
 prettySure = 'Hello TypeScript';
-console.log(prettySure.someProp);
-console.log(prettySure.length);
-prettySure.someMethod();
-prettySure.charAt(0);
+/* Error */ console.log(prettySure.someProp);
+/* Error */ console.log(prettySure.length);
+/* Error */ prettySure.someMethod();
+/* Error */ prettySure.charAt(0);

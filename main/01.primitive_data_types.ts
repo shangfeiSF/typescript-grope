@@ -10,14 +10,14 @@
 
 let isFalse: boolean = false;
 let isTrue: boolean = true;
-let createdByNewBooleanFirst: boolean = new Boolean(true);
+/* Error */ let createdByNewBooleanFirst: boolean = new Boolean(true);
 let createdByNewBooleanSecond: Boolean = new Boolean(false);
 let createdByBooleanFirst: boolean = Boolean(true);
 let createdByBooleanSecond: Boolean = Boolean(false);
 
 let isOne: number = 1;
 let isTwo: number = 2;
-let createdByNewNumberFirst: number = new Number(1);
+/* Error */ let createdByNewNumberFirst: number = new Number(1);
 let createdByNewNumberScecond: Number = new Number(2);
 let createdByNumberFirst: number = Number(1);
 let createdByNumberSecond: Number = Number(2);
@@ -33,7 +33,7 @@ let infinityNumber: number = Infinity;
 
 let isHelloSring: string = 'Hello';
 let isWorldString: string = 'World';
-let createdByNewStringFirst: string = new String('Hello');
+/* Error */ let createdByNewStringFirst: string = new String('Hello');
 let createdByNewStringSecond: String = new String('World');
 let createdByStringFirst: string = String('Hello');
 let createdByStringSecond: String = String('World');
@@ -58,8 +58,8 @@ function someMehod(): void {
 // 空值类型只能用undefined和null赋值
 let voidToUndefined: void = undefined;
 let voidToNull: void = null;
-let voidToNumber: void = 1;
+/* Error */ let voidToNumber: void = 1;
 
 // void类型的变量不能赋值给其他类型的变量
 let isVoid: void = null;
-let numberToVoid: number = isVoid;
+/* Error */ let numberToVoid: number = isVoid;

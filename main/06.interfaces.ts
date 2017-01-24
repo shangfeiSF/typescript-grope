@@ -12,14 +12,14 @@ let personWithNameAndAge: Person = {
     age: 20,
 };
 // 变量比接口少了一些必选属性是不允许的
-let personWithoutAge: Person = {
+/* Error */ let personWithoutAge: Person = {
     name: 'javaScript'
 };
 // 变量比接口多了一些未定义属性是不允许的
 let personWithHobby: Person = {
     name: 'javaScript',
     age: 20,
-    hobby: 'sports'
+    /* Error */ hobby: 'sports'
 };
 
 // 接口中可以定义可选属性
@@ -46,7 +46,7 @@ let catUnkonwnColor: Cat = {
 let catWithBirthday: Cat = {
     name: 'haha',
     age: 2,
-    birthday: '2017-01-01'
+    /* Error */ birthday: '2017-01-01'
 };
 
 // 接口可以定义任意属性，任意属性需要搭配索引签名
@@ -123,8 +123,8 @@ let wordInDictionary: Dictionary = {
     short: 'hi'
 }
 // 只读属性不能再赋值
-wordInDictionary['index'] = 'P11'
-wordInDictionary['ishortIndexndex'] = 'P11'
+/* Error */ wordInDictionary['index'] = 'P11'
+/* Error */ wordInDictionary['ishortIndexndex'] = 'P11'
 wordInDictionary['explain'] = 'This word can be used when greeting to others.'
 
 // 如果一个任意属性的索引签名为number类型
@@ -164,5 +164,5 @@ let doyWithAgeWithFeatures: DogWithAgeWithFeatures = {
 interface NumberDictionary {
     [index: string]: number;
     length: number;    // 可以，length是number类型
-    name: string       // 错误，`name`的类型不是索引类型的子类型
+    /* Error */ name: string       // 错误，`name`的类型不是索引类型的子类型
 }
