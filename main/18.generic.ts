@@ -27,7 +27,7 @@ let greetingAgain = identityGeneric('Hello typeScript')
 // 定义泛型时，编译器要求函数体必须正确使用通用类型
 // 也就是说，必须把类型变量约束的参数作为任意或所有类型
 function identityAndLogLength<T>(arg: T): T {
-    console.log(arg.length);  // Error
+    console.log(arg.length);  // error code
     return arg;
 }
 
