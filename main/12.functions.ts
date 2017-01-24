@@ -25,12 +25,3 @@ let show: (inner: string) => void = function (inner: string): void {
     console.log(inner);
     console.log(outer);
 };
-
-// 使用接口描述函数类型
-interface Minus {
-    (x: number, y: number): number
-}
-
-let minus: Minus = function (x: number, y: number): number {
-    return x - y;
-};
