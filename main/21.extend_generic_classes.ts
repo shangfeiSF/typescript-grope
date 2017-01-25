@@ -9,15 +9,12 @@ interface SuperProps<U> {
 }
 
 class Super_Class<T> {
-    // 静态属性不能使用泛型类型T
-    static static_super_prop: 'static_super_prop';
+    static static_super_prop = 'static_super_prop';
 
-    // public/private/protected修饰的属性都可以使用泛型类型T
     public_super_prop: T;
     private private_super_prop: Array<T>;
     protected protected_super_prop: T | STRING;
 
-    // 类构造函数可以使用泛型类型T
     constructor(superProps: SuperProps<T>) {
         this.public_super_prop = superProps.x;
         this.private_super_prop = superProps.y;
@@ -38,7 +35,7 @@ interface SubProps<U> {
 type SuperGenericValue = number;
 
 class Sub_Class<T> extends Super_Class<SuperGenericValue> {
-    static static_sub_prop: 'static_sub_prop';
+    static static_sub_prop = 'static_sub_prop';
 
     public_sub_prop: Array<T>;
     private private_sub_prop: T;
@@ -53,7 +50,7 @@ class Sub_Class<T> extends Super_Class<SuperGenericValue> {
     };
 
     use_public_sub_prop: (x: Array<T>, y: Array<T>) => Array<T>;
-    use_private_sub_prop: (x: T) => T;
+    use_private_sub_prop: (x: Array<T>) => T;
     use_protected_sub_prop: () => Array<T> | NUMBER;
 }
 
@@ -80,33 +77,32 @@ sub_instance.use_private_super_prop = function (x) {
 };
 sub_instance.use_protected_super_prop = function () {
     return this.protected_super_prop;
-
 };
+
 sub_instance.use_public_sub_prop = function (x, y) {
-    return this.public_sub_prop + x + y;
+    return this.public_sub_prop.concat(x).concat(y);
 };
 sub_instance.use_private_sub_prop = function (x) {
-    return this.private_sub_prop + '/' + x;
+    return x.indexOf(this.private_sub_prop) > -1 ? this.private_sub_prop : x[0];
 };
 sub_instance.use_protected_sub_prop = function () {
     return this.protected_sub_prop;
 };
 
-console.log(Sub_Class.static_sub_prop);
-console.log(Sub_Class.static_super_prop);
+console.log(Sub_Class.static_super_prop);  // 'static_super_prop'
+console.log(sub_instance.public_super_prop);  // 0
+console.log(sub_instance.private_super_prop);  // [1,2,3,4,5]
+console.log(sub_instance.protected_super_prop);  // 'hello world'
 
-console.log(sub_instance.public_super_prop);
-console.log(sub_instance.private_super_prop);
-console.log(sub_instance.protected_super_prop);
+console.log(sub_instance.use_public_super_prop(1, 2));  // 3
+console.log(sub_instance.use_private_super_prop(6));  // [1,2,3,4,5,6]
+console.log(sub_instance.use_protected_super_prop());  // 'hello world'
 
-console.log(sub_instance.public_sub_prop);
-console.log(sub_instance.private_sub_prop);
-console.log(sub_instance.protected_sub_prop);
+console.log(Sub_Class.static_sub_prop);  // 'static_sub_prop'
+console.log(sub_instance.public_sub_prop);  // ['hello', 'hi', 'howdy']
+console.log(sub_instance.private_sub_prop);  // 'an expression of greeting'
+console.log(sub_instance.protected_sub_prop);  // ['Hello world', 'Hi, everyone.', 'Howdy, partner.']
 
-console.log(sub_instance.use_public_super_prop(1, 2));
-console.log(sub_instance.use_private_super_prop(6));
-console.log(sub_instance.use_protected_super_prop());
-
-console.log(sub_instance.use_public_sub_prop(['你好'], ['안녕하세요']));
-console.log(sub_instance.use_private_sub_prop('give a previous notice'));
-console.log(sub_instance.use_protected_sub_prop());
+console.log(sub_instance.use_public_sub_prop(['你好'], ['안녕하세요']));  // ['hello', 'hi', 'howdy', '你好', '안녕하세요']
+console.log(sub_instance.use_private_sub_prop(['give a previous notice']));  // 'give a previous notice'
+console.log(sub_instance.use_protected_sub_prop());  // ['Hello world', 'Hi, everyone.', 'Howdy, partner.']
