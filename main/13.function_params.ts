@@ -7,10 +7,10 @@ function makeName(firstName: string, lastName: string): string {
 };
 
 let name1 = makeName('Bob');  // error code
-let name2 = makeName('Bob', 'Adams', 'Smith');;  // error code
+let name2 = makeName('Bob', 'Adams', 'Smith');  // error code
 let name3 = makeName('Bob', 'Adams');
 
-//  在TypeScript里，可以在参数名旁使用 ? 实现可选参数，可选参数必须跟在必须参数后面
+//  在TypeScript里，可以在参数名旁使用 ? 实现可选参数，可选参数必须跟在必选参数后面
 function buildIndex(word: string, description?: string, short?: string): string {
     return `${word} ${description} ${short}`;
 };

@@ -1,19 +1,20 @@
 interface UIElement {
     // this: void首先表明addClickListener期望回调方法onclick不要求this具备类型
-    // 其次指明onclick方法内部可以使用this
+    // 其次指明onclick方法内部可以使用this，但是this: void实际上并无任何用处
     addClickListener(onclick: (this: void, e: Event) => void): void;
 }
 
 class Handler {
     eventType: string;
 
-    // 指明了this: Handler，保证了this.eventType无误，但是不符合addClickListener对onclick的期望this: void
+    // 指明了this: Handler，保证了通过this访问属性编译通过，但是不符合addClickListener对onclick的期望this: void
     recordEventType_used_Handler(this: Handler, e: Event) {
         this.eventType = e.type;
     };
 
-    // 指明了this: void，放弃了使用this的能力，但是符合addClickListener对onclick的期望this: void
+    // 指明了this: void，放弃了使用this访问属性的能力，但是符合addClickListener对onclick的期望this: void
     recordEventType_used_void(this: void, e: Event) {
+        console.log(this);
         this.eventType = e.type;  // error code
     }
 

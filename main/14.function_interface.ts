@@ -3,13 +3,12 @@ interface F1 {
     (a: string, b: Array<number>, c: boolean, d?: number): Array<string>
 }
 let f1: F1 = function (a: string, b: Array<number>, c: boolean, d?: number): Array<string> {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return [a, String('')];
 };
 
-// TypeScript类型兼容性在函数赋值时的原则：
+// TypeScript类型兼容性在函数赋值时的原则
+
 // (1) 返回值类型满足：
 // 左函数的返回值类型 is
 // 右函数的返回值类型 de 子类型
@@ -30,8 +29,7 @@ function f1_3(a: string, b: Array<number>): number {
     return b.length;
 }
 function f1_4(a: string, b: Array<number>): void {
-    console.log(a);
-    console.log(b);
+    console.log(a, b);
 }
 let function_1_1: Function_1 = f1_1;
 let function_1_2: Function_1 = f1_2;
@@ -63,25 +61,19 @@ function f2_5(a: string, b: Array<number>): string {
     return a;
 }
 function f2_6(a: string, b: Array<number>, c?: boolean): string {
-    console.log(b);
-    console.log(c);
+    console.log(b, c);
     return a;
 }
 function f2_7(a: string, b: Array<number>, c: boolean): string {
-    console.log(b);
-    console.log(c);
+    console.log(b, c);
     return a;
 }
 function f2_8(a: string, b: Array<number>, c: boolean, d?: Array<string>): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f2_9(a: string, b: Array<number>, c: boolean, d: Array<string>): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 let function_2_1: Function_2 = f2_1;
@@ -101,64 +93,43 @@ interface Function_3 {
     (a: string, b: Array<number>, c: boolean, d?: number): string;
 }
 function f3_1(a: string, b: Array<number>, c: boolean, d?: number): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f3_2(a: any, b: Array<number>, c: boolean, d?: number): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f3_3(a: Array<string>, b: Array<number>, c: boolean, d?: number): string {
-    console.log(a);
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(a, b, c, d);
     return String('');
 }
 function f3_4(a: string, b: Array<any>, c: boolean, d?: number): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f3_5(a: string, b: string, c: boolean, d?: number): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f3_6(a: string, b: Array<number>, c: any, d?: number): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f3_7(a: string, b: Array<number>, c: Array<boolean>, d?: number): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f3_8(a: string, b: Array<number>, c: boolean, d?: string): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f3_9(a: string, b: Array<number>, c: boolean, d?: Array<number>): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function f3_10(a: string, b: Array<number>, c: boolean, d?: any): string {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 let function_3_1: Function_2 = f3_1;

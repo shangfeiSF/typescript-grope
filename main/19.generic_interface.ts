@@ -11,6 +11,7 @@ let g1: G1 = function <T>(a: T, b: Array<T>): T {
 }
 
 interface G2<T> {
+    // 泛型参数当作整个接口的一个参数
     (a: T, b: Array<T>): T;
 }
 let g2: G2<string> = function <T>(a: T, b: Array<T>): T {
@@ -26,18 +27,15 @@ interface Generic_1 {
     <T>(a: T, b: Array<T>): string;
 }
 function g1_1<T>(a: T, b: Array<T>): string {
-    console.log(a);
-    console.log(b);
+    console.log(a, b);
     return String('');
 }
 function g1_2<T>(a: T, b: Array<T>): any {
-    console.log(a);
-    console.log(b);
+    console.log(a, b);
     return new Boolean(true);
 }
 function g1_3<T>(a: T, b: Array<T>): T {
-    console.log(a);
-    console.log(b);
+    console.log(a, b);
     return <T>{};
 }
 function g1_4<T>(a: T, b: Array<T>): Array<T> {
@@ -73,25 +71,19 @@ function g2_5<T>(a: T, b: Array<T>): T {
     return a;
 }
 function g2_6<T>(a: T, b: Array<T>, c?: string): T {
-    console.log(b);
-    console.log(c);
+    console.log(b, c);
     return a;
 }
 function g2_7<T>(a: T, b: Array<T>, c: string): T {
-    console.log(b);
-    console.log(c);
+    console.log(b, c);
     return a;
 }
 function g2_8<T>(a: T, b: Array<T>, c: string, d?: number): T {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function g2_9<T>(a: T, b: Array<T>, c: string, d: number): T {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 let generic_2_1: Generic_2 = g2_1;
@@ -111,63 +103,43 @@ interface Generic_3 {
     <T>(a: T, b: Array<T>, c: string, d?: number): T;
 }
 function g3_1<T>(a: T, b: Array<T>, c: string, d?: number): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 function g3_2<T>(a: T, b: Array<string>, c: string, d?: number): T {
-    console.log(b);
-    console.log(c);
-    console.log(d);
+    console.log(b, c, d);
     return a;
 }
 function g3_3<T>(a: number, b: Array<T>, c: string, d?: number): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 function g3_4<T>(a: any, b: Array<any>, c: string, d?: number): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 function g3_5<T>(a: T, b: Array<T>, c: number, d?: number): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 function g3_6<T>(a: T, b: Array<T>, c: T, d?: number): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 function g3_7<T>(a: T, b: Array<T>, c: any, d?: number): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 function g3_8<T>(a: T, b: Array<T>, c: string, d?: string): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 function g3_9<T>(a: T, b: Array<T>, c: string, d?: T): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 function g3_10<T>(a: T, b: Array<T>, c: string, d?: any): T {
-    console.log(a);
-    console.log(c);
-    console.log(d);
+    console.log(a, c, d);
     return b[0];
 }
 let generic_3_1: Generic_2 = g3_1;
