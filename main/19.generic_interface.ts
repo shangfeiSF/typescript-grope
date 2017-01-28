@@ -5,6 +5,7 @@
 interface G1 {
     <T>(a: T, b: Array<T>): T;
 }
+
 let g1: G1 = function <T>(a: T, b: Array<T>): T {
     console.log(b);
     return a;
@@ -14,10 +15,22 @@ interface G2<T> {
     // 泛型参数当作整个接口的一个参数
     (a: T, b: Array<T>): T;
 }
+
+type STRING = string;
+type NUMBER = number;
+
 let g2: G2<string> = function <T>(a: T, b: Array<T>): T {
     console.log(b);
     return a;
-}
+};
+let g3: G2<STRING> = function (a: STRING, b: Array<STRING >): STRING {
+    console.log(b);
+    return a;
+};
+let g4: G2<NUMBER> = function (a: STRING, b: Array<STRING >): STRING {  // error code
+    console.log(b);
+    return a;
+};
 
 // TypeScript类型兼容性在泛型赋值时的原则：
 // (1) 返回值类型满足：
