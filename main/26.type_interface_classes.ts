@@ -1,20 +1,3 @@
-// TypeScript里，在没有明确指出类型时，类型推论会提供类型
-
-// 定义something_1时类型推论根据3得出string
-let something_1 = 'Hello world';
-something_1 = 7;
-
-// 定义something_2时类型推论直接得出any
-let something_2;
-something_2 = 'Hello world';
-something_2 = 7;
-
-// 推论array的类型是 number | boolean
-let array = [0, 1, true];
-array[0] = 10;
-array[1] = null;
-array[2] = 'Hello world';
-
 class Animal {
     name: string;
 
@@ -26,7 +9,7 @@ class Animal {
 class Dog extends Animal {
     color: string;
 
-    constructor(color: string, name: string) {
+    constructor(name: string, color: string) {
         super(name);
         this.color = color;
     }
@@ -34,7 +17,7 @@ class Dog extends Animal {
 class Cat extends Animal {
     age: number;
 
-    constructor(age: number, name: string) {
+    constructor(name: string, age: number) {
         super(name);
         this.age = age;
     }
@@ -76,8 +59,8 @@ class Fullname_person {
 
 let animal = new Animal('doudou');
 
-let dog = new Dog('white', 'doudou');
-let cat = new Cat(3, 'doudou');
+let dog = new Dog('doudou', 'white');
+let cat = new Cat('doudou', 3);
 let bird = new Bird('doudou');
 
 let name_person = new Name_person('xiaowang', 15);
