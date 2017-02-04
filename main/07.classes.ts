@@ -132,7 +132,7 @@ cup = new Cup('glass');
 let CupAlias: typeof Cup = Cup;
 
 console.log(CupAlias.description);
-let anotherCup: Cup;
+let anotherCup: Cup; // 这里还是不能用 CupAlias
 anotherCup = new CupAlias('iron');
 
 // 类作为接口使用

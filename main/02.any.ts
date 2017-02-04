@@ -7,7 +7,7 @@ console.log(isAny.someProp.someProp);
 // 在any上允许调用任何方法
 isAny.someMethod('Hello TypeScript');
 isAny.someMethod('Hello TypeScript').someProp;
-isAny.someProp.someMethod();
+isAny.someProp.someMethod('Hello TypeScript');
 
 // 如果变量在声明时未指定类型，那么会被推断为为any类型
 let something;

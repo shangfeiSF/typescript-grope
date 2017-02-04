@@ -12,8 +12,9 @@ let personWithNameAndAge: Person = {
     age: 20,
 };
 // 变量比接口少了一些必选属性是不允许的
-let personWithoutAge: Person = {  // error code
+let personWithoutAge: Person = {
     name: 'javaScript'
+    // error code
 };
 // 变量比接口多了一些未定义属性是不允许的
 let personWithHobby: Person = {
@@ -62,7 +63,7 @@ interface DogWithAgeOne {
     [propName: string]: string;
     name: string;
     age: null;
-    // age: number;
+    // age: number;  // error code
     color?: string;
 }
 
@@ -110,7 +111,7 @@ interface Dictionary {
     pronunciation: string;
     charCounts: string;
     short?: string;
-    // charCounts: number;
+    // charCounts: number;  // error code
 }
 
 let wordInDictionary: Dictionary = {
@@ -124,7 +125,7 @@ let wordInDictionary: Dictionary = {
 }
 // 只读属性不能再赋值
 wordInDictionary['index'] = 'P11'  // error code
-wordInDictionary['ishortIndexndex'] = 'P11'  // error code
+wordInDictionary['ishortIndex'] = 'P11'  // error code
 wordInDictionary['explain'] = 'This word can be used when greeting to others.'
 
 // 如果一个任意属性的索引签名为number类型
@@ -142,10 +143,11 @@ interface DogWithoutAgeWithFeatures {
 // 当满足（2）时，索引签名为number类型的任意属性的属性值类型必须是string类型索引签名的子类型
 interface DogWithAgeWithFeatures {
     name: string;
-    age: number;
+    age: string;
     color?: string;
-    [propName: string]: any;
-    [featureIndex: number]: number;
+    [propName: string]: string;
+    [featureIndex: number]: string;
+    // [featureIndex: number]: number;  // error code
 }
 
 let doyWithoutAgeWithFeatures: DogWithoutAgeWithFeatures = {
@@ -156,13 +158,7 @@ let doyWithoutAgeWithFeatures: DogWithoutAgeWithFeatures = {
 
 let doyWithAgeWithFeatures: DogWithAgeWithFeatures = {
     name: 'doudou',
-    age: 2,
+    age: '2',
     birthday: '2017-01-01',
-    1: 100
-}
-
-interface NumberDictionary {
-    [index: string]: number;
-    length: number;    // 可以，length是number类型
-    name: string       // 错误，`name`的类型不是索引类型的子类型  // error code
+    1: '100'
 }

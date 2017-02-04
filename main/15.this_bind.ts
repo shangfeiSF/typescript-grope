@@ -56,4 +56,4 @@ let picker = randomName.createPicker();
 let pickedName = picker();
 
 // 当设置--noImplicitThis时，TypeScript上段代码不会再报错
-// tsc --noImplicitThis --outFile 14.noImplicitThis_this.js  14.this.tsa
+// tsc --noImplicitThis --outFile 14.noImplicitThis_this.js  14.this_bind.ts

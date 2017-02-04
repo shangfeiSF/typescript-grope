@@ -5,26 +5,17 @@
 // 不在乎它们从何处而来，只要所有成员的类型都是兼容的，不论是来自类定义或类继承，就认为它们的类型是兼容的
 // Navy Airforce Specialforce是兼容的，实例之间可以赋值，与Army都不兼容
 class Army {
-    name: string;
-
-    constructor(name: string) {
-        this.name = name;
+    constructor(public name: string) {
     }
 }
 
 class Navy {
-    alias: string;
-
-    constructor(name: string) {
-        this.alias = name;
+    constructor(public alias: string) {
     }
 }
 
 class Airforce {
-    alias: string;
-
-    constructor(name: string) {
-        this.alias = name;
+    constructor(public alias: string) {
     }
 }
 

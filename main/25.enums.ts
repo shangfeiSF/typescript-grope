@@ -54,7 +54,9 @@ console.log(valueOfNow);
 console.log(nameOfNow);
 
 // 为了避免生成多余的代码和间接引用，可以使用常数枚举
-// 常数枚举是在enum关键字前使用const修饰符。
+// 常数枚举是在enum关键字前使用const修饰符
+
+// 编译后的代码是不存在const enum Animal
 const enum Animal {
     Dog = 1,
     Cat = Dog * 2,
