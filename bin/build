@@ -1,0 +1,114 @@
+var fs = require('fs')
+var path = require('path')
+var child_process = require('child_process')
+
+var nopt = require('nopt')
+var colors = require('colors')
+var Promise = require('bluebird')
+
+Promise.promisifyAll(fs)
+var execAsync = Promise.promisify(child_process.exec, {
+  context: child_process,
+  multiArgs: true
+})
+
+var mainDir = path.join(process.cwd(), 'main')
+var buildDir = path.join(process.cwd(), 'build')
+var command = {
+  main: 'tsc',
+  outDir: ['--outDir'],
+  target: ['--target']
+}
+
+var knowns = {
+  'index': Array,
+  'details': Boolean,
+  'serial': Boolean,
+  'target': String
+}
+var shorts = (function () {
+  var shorts = {
+    't': ['--target'],
+    'i': ['--index'],
+    'd': ['--details', 'true'],
+    's': ['--serial', 'true'],
+    't5': ['--target', 'ES5'],
+    't6': ['--target', 'ES6']
+  }
+
+  fs.readdirSync(mainDir).forEach(function (dir) {
+    var state = fs.statSync(mainDir, dir)
+    if (state.isDirectory()) {
+      var cmd = 'i' + dir.split('\.').shift()
+      shorts[cmd] = ['--index']
+      shorts[cmd].push(dir)
+    }
+  })
+
+  return shorts
+})()
+var options = nopt(knowns, shorts, process.argv, 2)
+
+fs.readdirAsync(mainDir)
+  .filter(function (dir) {
+    return fs.statAsync(path.join(mainDir, dir))
+      .then(function (state) {
+        return state.isDirectory() &&
+          (
+            (options.index && options.index.length) ?
+              options.index.indexOf(dir) > -1 :
+              true
+          )
+      })
+  })
+  .map(function (dirname) {
+    var cmd = [
+      command.main,
+      command.outDir.concat(path.join(buildDir, dirname)).join(' '),
+      command.target.concat(options.target ? options.target : 'ES5').join(' ')
+    ]
+
+    var dir = path.join(mainDir, dirname)
+
+    return fs.readdirAsync(dir)
+      .filter(function (file) {
+        return fs.statAsync(path.join(dir, file))
+          .then(function (state) {
+            return path.extname(file) == '.ts' && !state.isDirectory()
+          })
+      })
+      .then(function (files) {
+        return {
+          cmd: cmd,
+          dir: dir,
+          files: files
+        }
+      })
+  })
+  .then(function (configs) {
+    var iterator = options.serial ? Promise.mapSeries : Promise.map
+
+    return iterator(configs, function (config) {
+      console.log(('Begin to compiler:' + config.dir).yellow)
+
+      return iterator(config.files, function (file) {
+        var cmd = config.cmd.concat(path.join(config.dir, file)).join(' ')
+
+        return execAsync(cmd, {cwd: process.cwd()})
+          .then(
+            function (details) {
+              options.details && console.log(details)
+            },
+            function (error) {
+              options.details && console.log(error.message)
+            }
+          )
+          .finally(function () {
+            console.log(('Done:' + file).cyan)
+          })
+      })
+        .then(function () {
+          console.log(('Finish to compiler:' + config.dir + '\n').green)
+        })
+    })
+  })

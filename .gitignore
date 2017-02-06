@@ -1,2 +1,5 @@
 .idea
+node_modules/
 main/**/build/
+npm-debug.log
+build/
