@@ -1,5 +1,7 @@
 # typescript-grop
 
+推荐使用Webstorm来查看，配合watchFile观察实时编译结果和报错提示
+
 ## License
 
 (The MIT License)

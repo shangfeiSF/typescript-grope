@@ -1,8 +1,7 @@
 {
   "name": "typescript-grope",
   "scripts": {
-    "cs03": "tsc --strictNullChecks --outFile 03.strictMode_undefined_and_null.js  03.undefinde_and_null.ts",
-    "c03": "tsc --outFile 03.not_strictMode_undefined_and_null.js 03.undefinde_and_null.ts"
+    "clear": "rm ./**/build/*.js"
   },
   "version": "1.0.0",
   "dependencies": {},
