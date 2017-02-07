@@ -1,6 +1,18 @@
 # typescript-grop
 
-推荐使用Webstorm来查看，配合watchFile观察实时编译结果和报错提示
+## Start
+
+`cd path/to/typescript-grope`
+
+`npm install`
+
+`npm start`
+
+## Recommand
+
+WebStorm supports file-watcher to compile .ts to .js when coding. It is more important for me that Webstorm also tips all the error message when coding
+
+You can install Webstorm and press `command + ,` to open the preferences panel and then search `typescript` to config your file-watcher about typescript
 
 ## License
 

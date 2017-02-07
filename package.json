@@ -1,7 +1,7 @@
 {
   "name": "typescript-grope",
   "scripts": {
-    "start": "node bin/build",
+    "start": "node bin/build -s",
     "clear": "rm ./**/build/*.js",
     "remove": "rm -R ./build/"
   },
