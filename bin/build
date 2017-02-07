@@ -12,9 +12,13 @@ var execAsync = Promise.promisify(child_process.exec, {
   multiArgs: true
 })
 
-var mainDir = path.join(process.cwd(), 'main')
-var buildDir = path.join(process.cwd(), 'build')
-var command = {
+var DIRS = {
+  main: path.join(__dirname, '../main'),
+  build: path.join(__dirname, '../build'),
+  mainSubs: fs.readdirSync(path.join(__dirname, '../main'))
+}
+
+var CMD = {
   main: 'tsc',
   outDir: ['--outDir'],
   target: ['--target']
@@ -28,16 +32,17 @@ var knowns = {
 }
 var shorts = (function () {
   var shorts = {
-    't': ['--target'],
     'i': ['--index'],
     'd': ['--details', 'true'],
     's': ['--serial', 'true'],
+    't': ['--target'],
     't5': ['--target', 'ES5'],
     't6': ['--target', 'ES6']
   }
 
-  fs.readdirSync(mainDir).forEach(function (dir) {
-    var state = fs.statSync(mainDir, dir)
+  DIRS.mainSubs.forEach(function (dir) {
+    var state = fs.statSync(path.join(DIRS.main, dir))
+
     if (state.isDirectory()) {
       var cmd = 'i' + dir.split('\.').shift()
       shorts[cmd] = ['--index']
@@ -49,30 +54,30 @@ var shorts = (function () {
 })()
 var options = nopt(knowns, shorts, process.argv, 2)
 
-fs.readdirAsync(mainDir)
-  .filter(function (dir) {
-    return fs.statAsync(path.join(mainDir, dir))
-      .then(function (state) {
-        return state.isDirectory() &&
-          (
-            (options.index && options.index.length) ?
-              options.index.indexOf(dir) > -1 :
-              true
-          )
-      })
-  })
+Promise.filter(DIRS.mainSubs, function (dirname) {
+  return fs.statAsync(path.join(DIRS.main, dirname))
+    .then(function (state) {
+      return state.isDirectory() &&
+        (
+          (options.index && options.index.length) ?
+            options.index.indexOf(dirname) > -1 :
+            true
+        )
+    })
+})
   .map(function (dirname) {
     var cmd = [
-      command.main,
-      command.outDir.concat(path.join(buildDir, dirname)).join(' '),
-      command.target.concat(options.target ? options.target : 'ES5').join(' ')
+      CMD.main,
+      CMD.outDir.concat(path.join(DIRS.build, dirname)).join(' '),
     ]
 
-    var dir = path.join(mainDir, dirname)
+    options.target && cmd.push(CMD.target.concat(options.target)).join(' ')
 
-    return fs.readdirAsync(dir)
+    var dirpath = path.join(DIRS.main, dirname)
+
+    return fs.readdirAsync(dirpath)
       .filter(function (file) {
-        return fs.statAsync(path.join(dir, file))
+        return fs.statAsync(path.join(dirpath, file))
           .then(function (state) {
             return path.extname(file) == '.ts' && !state.isDirectory()
           })
@@ -80,21 +85,22 @@ fs.readdirAsync(mainDir)
       .then(function (files) {
         return {
           cmd: cmd,
-          dir: dir,
+          dirname: dirname,
+          dirpath: dirpath,
           files: files
         }
       })
   })
   .then(function (configs) {
-    var iterator = options.serial ? Promise.mapSeries : Promise.map
+    var ITERATOR = options.serial ? Promise.mapSeries : Promise.map
 
-    return iterator(configs, function (config) {
-      console.log(('Begin to compiler:' + config.dir).yellow)
+    return ITERATOR(configs, function (config) {
+      console.log(('Begin to compiler:' + config.dirpath).yellow)
 
-      return iterator(config.files, function (file) {
-        var cmd = config.cmd.concat(path.join(config.dir, file)).join(' ')
+      return Promise.mapSeries(config.files, function (file) {
+        var cmd = config.cmd.concat(path.join(config.dirpath, file)).join(' ')
 
-        return execAsync(cmd, {cwd: process.cwd()})
+        return execAsync(cmd, {cwd: path.join(__dirname, '../main')})
           .then(
             function (details) {
               options.details && console.log(details)
@@ -104,11 +110,12 @@ fs.readdirAsync(mainDir)
             }
           )
           .finally(function () {
-            console.log(('Done:' + file).cyan)
+            var msg = 'Done:' + (options.serial ? '' : (config.dirname + '/')) + file
+            console.log(msg.cyan)
           })
       })
         .then(function () {
-          console.log(('Finish to compiler:' + config.dir + '\n').green)
+          console.log(('Finish to compiler:' + config.dirpath + '\n').green)
         })
     })
   })
