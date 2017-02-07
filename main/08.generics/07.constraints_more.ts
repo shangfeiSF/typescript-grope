@@ -24,8 +24,8 @@ function create<T>(c: {new(): T;}): T {
     return new c();
 }
 
-let animal = create<Person>(Person)
-console.log(animal.greeting);
+let person = create<Person>(Person)
+console.log(person.greeting);
 
 // 使用原型属性推断并约束构造函数与类实例的关系
 class BeeKeeper {

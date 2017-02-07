@@ -9,15 +9,15 @@ interface requireLength {
     length: number;
 }
 
-function showLength<T extends requireLength>(arg: T): void {
+function LENGTH<T extends requireLength>(arg: T): void {
     console.log(arg.length);
 };
 
-showLength<STRING>('hello typeScript');
-showLength<Array<NUMBER>>([0, 1, 2, 3]);
-showLength({length: 11, value: 'hello world'});
-showLength<NUMBER>(10);  // error code
-showLength({len: 11, value: 'hello world'});  // error code
+LENGTH<STRING>('hello typeScript');
+LENGTH<Array<NUMBER>>([0, 1, 2, 3]);
+LENGTH({length: 11, value: 'hello world'});
+LENGTH<NUMBER>(10);  // error code
+LENGTH({len: 11, value: 'hello world'});  // error code
 
 // 函数表达式
 interface needengthInType<T extends requireLength> {
@@ -32,30 +32,34 @@ let common = function (arg) {
     console.log(arg.length);
 };
 
-let showLengthInTypeString: needengthInType<STRING> = common;
-showLengthInTypeString('hello typeScript');
-showLengthInTypeString([0, 1, 2, 3]);  // error code
-showLengthInTypeString({length: 11, value: 'hello world'});  // error code
-showLengthInTypeString(10);  // error code
-showLengthInTypeString({len: 11, value: 'hello world'});  // error code
+let L1: needengthInType<STRING> = common;
 
-let showLengthInTypeArrayNumber: needengthInType<Array<NUMBER>> = common;
-showLengthInTypeArrayNumber('hello typeScript');  // error code
-showLengthInTypeArrayNumber([0, 1, 2, 3]);
-showLengthInTypeArrayNumber({length: 11, value: 'hello world'});  // error code
-showLengthInTypeArrayNumber(10);  // error code
-showLengthInTypeArrayNumber({len: 11, value: 'hello world'});  // error code
+L1('hello typeScript');
+L1([0, 1, 2, 3]);  // error code
+L1({length: 11, value: 'hello world'});  // error code
+L1(10);  // error code
+L1({len: 11, value: 'hello world'});  // error code
 
-let showLengthNeedLength: needLength = common;
-showLengthNeedLength('hello typeScript');
-showLengthNeedLength([0, 1, 2, 3]);
-showLengthNeedLength({length: 11, value: 'hello world'});
-showLengthNeedLength(10);  // error code
-showLengthNeedLength({len: 11, value: 'hello world'});  // error code
+let L2: needengthInType<Array<NUMBER>> = common;
 
-let showLengthInTypeNumber: needengthInType<NUMBER> = common;  // error code
-showLengthInTypeNumber('hello typeScript');  // error code
-showLengthInTypeNumber([0, 1, 2, 3]);  // error code
-showLengthInTypeNumber({length: 11, value: 'hello world'});  // error code
-showLengthInTypeNumber(10);
-showLengthInTypeNumber({len: 11, value: 'hello world'});  // error code
+L2('hello typeScript');  // error code
+L2([0, 1, 2, 3]);
+L2({length: 11, value: 'hello world'});  // error code
+L2(10);  // error code
+L2({len: 11, value: 'hello world'});  // error code
+
+let L3: needLength = common;
+
+L3('hello typeScript');
+L3([0, 1, 2, 3]);
+L3({length: 11, value: 'hello world'});
+L3(10);  // error code
+L3({len: 11, value: 'hello world'});  // error code
+
+let L4: needengthInType<NUMBER> = common;  // error code
+
+L4('hello typeScript');  // error code
+L4([0, 1, 2, 3]);  // error code
+L4({length: 11, value: 'hello world'});  // error code
+L4(10);
+L4({len: 11, value: 'hello world'});  // error code
