@@ -3,7 +3,7 @@
 // 特例是undefined可以赋值到void
 
 // 配合--strictNullChecks:
-// tsc --strictNullChecks --outFile strictMode.js  03.undefinde_null.ts
+// tsc --strictNullChecks --outFile ./build/strictMode.js  03.undefinde_null.ts
 
 // 编译报错
 // error TS2322: Type 'undefined' is not assignable to type 'null'.
@@ -11,7 +11,7 @@
 // error TS2322: Type 'null' is not assignable to type 'void'.
 
 // 直接编译:
-// tsc --outFile none_strictMode.js 03.undefinde_null.ts
+// tsc --outFile ./build/none_strictMode.js 03.undefinde_null.ts
 
 let isNull: null;
 let isUndefined: undefined;
