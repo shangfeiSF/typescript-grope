@@ -6,14 +6,19 @@ import {Dog, Cat, Pet, dog, cat} from './common'
 let pet = Pet([dog, cat])
 
 // pet is Dog就是类型断言
-// 一个断言是 param is Type这种形式，param必须是来自于当前函数参数列表
+// 断言是param is Type这种形式，param必须是来自于当前函数参数列表
 function isDog(pet: Dog | Cat): pet is Dog {
     return (<Dog>pet).run !== undefined;
+}
+
+function isCat(pet: Dog | Cat): pet is Cat {
+    return (<Cat>pet).jump !== undefined;
 }
 
 if (isDog(pet)) {
     pet.run();
 }
-else {
+
+if (isCat(pet)) {
     pet.jump();
 }

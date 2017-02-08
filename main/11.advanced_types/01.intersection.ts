@@ -3,6 +3,7 @@
 // 使用交叉类型（Intersection Types）
 
 function intersection<T, U>(first: T, second: U): T & U {
+    // Intersection Types
     let result = <T & U>{};
 
     for (let key in first) {

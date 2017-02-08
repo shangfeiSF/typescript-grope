@@ -27,7 +27,7 @@ class ScientificCalculator extends BasicCalculator {
         super(value);
     }
 
-    public sin() {
+    public sin(): this {
         this.value = Math.sin(this.value);
         return this;
     }

@@ -46,8 +46,8 @@ interface Triangle {
 
 type ShapeMore = Square | Rectangle | Circle | Triangle;
 
-// 这样实现areaMore，不论是编辑时还是编译时，都无法检测出未处理Triangle类型的错误
-function areaMore_0(s: ShapeMore): number {
+// 这样实现areaMore，不论是coding or compiling，都无法检测出未处理Triangle类型的错误
+function areaMore_0(s: ShapeMore) {
     switch (s.kind) {
         case 'square':
             return s.size * s.size;
@@ -58,8 +58,10 @@ function areaMore_0(s: ShapeMore): number {
     }
 }
 
-// （1）启用 --strictNullChecks，并指定返回值类型：
+// （1）启用 --strictNullChecks，并指定返回值类型：compiling会报错
 
+// tsc --strictNullChecks --outFile ./build/strictNullChecks.js  08.discriminated_unions.ts
+// error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
 function areaMore_1(s: ShapeMore): number {
     switch (s.kind) {
         case "square":
@@ -71,7 +73,7 @@ function areaMore_1(s: ShapeMore): number {
     }
 }
 
-// （2）使用never类型，进行完整性检查：
+// （2）使用never类型，进行完整性检查：compiling会报错，coding会报错
 
 // assertNever检查s是否为never类型，即除去所有可能情况后剩下的类型
 function assertNever(x: never): never {
@@ -87,6 +89,7 @@ function areaMore_2(s: ShapeMore) {
         case "circle":
             return Math.PI * s.radius ** 2;
         default:
+            // error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
             return assertNever(s);  // error code here if there are missing cases
     }
 }
